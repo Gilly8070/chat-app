@@ -1,15 +1,16 @@
     import React, { useState, useEffect } from "react";
     import queryString from 'query-string';
     import io from "socket.io-client";
-
+    
+    import TextContainer from '../TextContainer/TextContainer'
     import Messages from '../Messages/Messages';
     import InfoBar from '../InfoBar/InfoBar';
     import Input from '../../Input/Input';
-    import TextContainer from '../TextContainer/TextContainer'
+    
 
     import './Chat.css';
 
-    const POINT = 'localhost:5000';
+    // const POINT = 'localhost:5000';
 
     let socket;
 
@@ -23,7 +24,7 @@
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
 
-        socket = io(POINT);
+        socket = io();
 
         setRoom(room);
         setName(name)
@@ -33,7 +34,7 @@
             alert(error);
         }
         });
-    }, [POINT, location.search]);
+    }, [location.search]);
     
     useEffect(() => {
         socket.on('message', message => {
