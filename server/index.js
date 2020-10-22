@@ -1,6 +1,6 @@
 const http = require('http');
 const express = require('express');
-// const socketio = require('socket.io');
+const socketio = require('socket.io');
 const cors = require('cors');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
@@ -11,11 +11,12 @@ const app = express();
 const server = http.createServer(app);
 // var server = app.listen(3000);
 // var io = require('socket.io').listen(server);
-// const io = socketio(server);
-var io = require('socket.io').listen(server)
+const io = socketio(server);
+// var io = require('socket.io').listen(server)
 
-app.use(cors());
+
 app.use(router);
+app.use(cors());
 
 io.on('connect', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
