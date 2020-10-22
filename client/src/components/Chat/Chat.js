@@ -10,7 +10,7 @@
 
     import './Chat.css';
 
-    // const POINT = 'localhost:5000';
+    const POINT = 'https://chat-app-app-2.herokuapp.com/';
 
     let socket;
 
@@ -24,17 +24,18 @@
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
 
-        socket = io();
-
-        setRoom(room);
+        socket = io(POINT);
+        
         setName(name)
+        setRoom(room);
+        
 
         socket.emit('join', { name, room }, (error) => {
         if(error) {
             alert(error);
         }
         });
-    }, [location.search]);
+    }, [POINT, location.search]);
     
     useEffect(() => {
         socket.on('message', message => {
