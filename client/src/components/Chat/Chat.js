@@ -10,7 +10,7 @@
 
     import './Chat.css';
 
-    const POINT = 'https://chat-app-app-2.herokuapp.com/';
+    const POINT = 'https://chat--appp.herokuapp.com/';
 
     let socket;
 
